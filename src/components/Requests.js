@@ -81,6 +81,7 @@ const Requests = props => {
             </select>
             {
                 pageData ?
+                <div>
                     <div className='show-data'>
                         <ul>
                             <li>{pageData.brand.label}</li>
@@ -88,6 +89,7 @@ const Requests = props => {
                             <li>{pageData.style.label}</li>
                         </ul>
                     </div>
+                </div>
                     : null
             }
         </div>

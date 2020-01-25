@@ -30,7 +30,6 @@
 
 .request-child {
   width: 400px;
-  background-color: #9753;
   margin: 0 auto;
 }
 .pad-20 {
@@ -52,7 +51,14 @@
 }
 .show-data {
   color: rgb(76, 28, 121);
-  font-weight: 600;  
+  font-weight: 600; 
+  border: 2px solid rgb(29, 26, 26);
+  border-radius: 10px;
+  display: inline-block;
+  margin: 20px auto; 
+}
+ul {
+  padding: 10px 40px;
 }
 li {
   list-style: none;
