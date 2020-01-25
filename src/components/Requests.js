@@ -37,6 +37,7 @@ const Requests = props => {
         if (JSON.parse(localStorage.getItem('data'))) setSelectChecks(JSON.parse(localStorage.getItem('data')))
     }, [])
 
+// eslint-disable-next-line
     useEffect(() => props.history.push(`s-${selectChecks.service}--b-${selectChecks.brand}--st-${selectChecks.style}`), [])
 
     const changeHandler = (e) => {
