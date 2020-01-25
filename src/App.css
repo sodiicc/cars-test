@@ -28,11 +28,25 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.request-child {
+  width: 400px;
+  background-color: #9753;
+  margin: 0 auto;
+}
+.pad-20 {
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+}
+.service {
+  background-color: rgb(170, 224, 204);
+  color: rgb(57, 133, 54);
+}
+.brand {
+  background-color: rgb(20, 51, 40);
+  color: rgb(208, 226, 141);
+}
+.style {
+  background-color: rgb(206, 196, 138);
+  color: rgb(102, 76, 151);
 }
