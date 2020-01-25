@@ -32,9 +32,11 @@ const Requests = props => {
         }
         setData()
     }, [styleUrl, serviceUrl, brandUrl])
+
     useEffect(() => {
         if (JSON.parse(localStorage.getItem('data'))) setSelectChecks(JSON.parse(localStorage.getItem('data')))
     }, [])
+
     useEffect(() => props.history.push(`s-${selectChecks.service}--b-${selectChecks.brand}--st-${selectChecks.style}`), [])
 
     const changeHandler = (e) => {
@@ -52,7 +54,6 @@ const Requests = props => {
         setSelectChecks({
             ...selectChecks, [e.target.name]: e.target.value
         })
-        // window.location = `s-${service}--b-${brand}--st-${style}`
         props.history.push(`s-${service}--b-${brand}--st-${style}`)
         fetch(url + `parse_link?service_slug=${service}&brand_slug=${brand}&style_slug=${style}`, { 'cache-control': 'no-store' })
             .then(res => res.json())
@@ -81,15 +82,15 @@ const Requests = props => {
             </select>
             {
                 pageData ?
-                <div>
-                    <div className='show-data'>
-                        <ul>
-                            <li>{pageData.brand.label}</li>
-                            <li>{pageData.service.label}</li>
-                            <li>{pageData.style.label}</li>
-                        </ul>
+                    <div>
+                        <div className='show-data'>
+                            <ul>
+                                <li>{pageData.brand.label}</li>
+                                <li>{pageData.service.label}</li>
+                                <li>{pageData.style.label}</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
                     : null
             }
         </div>
