@@ -10,13 +10,14 @@ const Requests = props => {
     const [serviceData, setService] = useState([])
     const [brandData, setBrand] = useState([])
     const [selectChecks, setSelectChecks] = useState({
-        service: 'serv',
-        brand: 'bmw',
+        service: 'farbuvannia',
+        brand: 'acura',
         style: 'barrokko',
     })
+    const [pageData, setPageData] = useState(null)
 
     const setDataType = (endpoint, set) => {
-        fetch(url + endpoint)
+        fetch(url + endpoint, { 'cache-control': 'no-store' })
             .then(res => res.json())
             .then(res => set(res.data))
     }
@@ -31,23 +32,31 @@ const Requests = props => {
         }
         setData()
     }, [styleUrl, serviceUrl, brandUrl])
-    useEffect(() => setSelectChecks(JSON.parse(localStorage.getItem('data'))), [])
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem('data'))) setSelectChecks(JSON.parse(localStorage.getItem('data')))
+    }, [])
+    useEffect(() => props.history.push(`s-${selectChecks.service}--b-${selectChecks.brand}--st-${selectChecks.style}`), [])
 
     const changeHandler = (e) => {
-        let prefix = ''
+        let service = selectChecks.service
+        let brand = selectChecks.brand
+        let style = selectChecks.style
         if (e.target.name === 'service') {
-            prefix = 's-'
+            service = e.target.value
         } else if (e.target.name === 'brand') {
-            prefix = 'b-'
-        } else prefix = 'st-'
-        console.log(e.target.value, e.target.name, e.target.prefix)
+            brand = e.target.value
+        } else style = e.target.value
         localStorage.setItem('data', JSON.stringify({
             ...selectChecks, [e.target.name]: e.target.value
         }))
         setSelectChecks({
             ...selectChecks, [e.target.name]: e.target.value
         })
-        props.history.push(`${prefix}${e.target.name}_${e.target.value}`)
+        // window.location = `s-${service}--b-${brand}--st-${style}`
+        props.history.push(`s-${service}--b-${brand}--st-${style}`)
+        fetch(url + `parse_link?service_slug=${service}&brand_slug=${brand}&style_slug=${style}`, { 'cache-control': 'no-store' })
+            .then(res => res.json())
+            .then(res => setPageData(res))
     }
     return (
         <div>
@@ -70,6 +79,17 @@ const Requests = props => {
                     styleData.map((el, ind) => <option key={ind} value={el.slug}>{el.label}</option>)
                 }
             </select>
+            {
+                pageData ?
+                    <div className='show-data'>
+                        <ul>
+                            <li>{pageData.brand.label}</li>
+                            <li>{pageData.service.label}</li>
+                            <li>{pageData.style.label}</li>
+                        </ul>
+                    </div>
+                    : null
+            }
         </div>
     )
 }

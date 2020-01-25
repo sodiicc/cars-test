@@ -50,3 +50,10 @@
   background-color: rgb(206, 196, 138);
   color: rgb(102, 76, 151);
 }
+.show-data {
+  color: rgb(76, 28, 121);
+  font-weight: 600;  
+}
+li {
+  list-style: none;
+}
